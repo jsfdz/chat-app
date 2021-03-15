@@ -2,13 +2,24 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../redux/actions/auth";
 import Join from "./Join";
+import { generateProfileImg } from "../helpers/generateProfileImg";
 
 const Home = ({ access, username, disconnect }) => {
   return (
     <>
       {access ? (
         <div className="home">
-          <div className="title">YouChat...</div>
+          <div className="title">
+            <div>
+              <img src="./img/iconchat.svg" alt="" />
+              YouChat...
+            </div>
+            <div className="user-icon">
+              <span className="profileImage imgTitle">
+                {generateProfileImg(username)}
+              </span>
+            </div>
+          </div>
           <h4>Welcome, {username}</h4>
           <div className="home-access">
             <Join username={username} />
@@ -19,7 +30,10 @@ const Home = ({ access, username, disconnect }) => {
         </div>
       ) : (
         <div className="home">
-          <div className="title">YouChat...</div>
+          <div className="title">
+            <img src="./img/iconchat.svg" alt="" />
+            YouChat...
+          </div>
           <h4>Welcome to roomChat</h4>
           <div className="home-container">
             <div className="option-login">

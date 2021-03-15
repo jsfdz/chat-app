@@ -18,8 +18,18 @@
   background-color: $bg-primary;
   height: 60px;
   display: flex;
-  @include xy;
+  justify-content: space-between;
+  padding: 0 20px;
   @include title;
+  div {
+    display: flex;
+    @include xy;
+    color: #fff;
+    img {
+      margin-right: 10px;
+      height: 26px;
+    }
+  }
 }
 
 .option-login {
@@ -41,7 +51,6 @@
     a {
       text-decoration: none;
       p {
-        border-radius: 10px;
         @include btn;
         width: 100px;
         margin: 20px;

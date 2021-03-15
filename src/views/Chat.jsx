@@ -49,96 +49,92 @@ const Chat = ({ token, currentuser }) => {
 
   return (
     <>
-      <div className="chat">
-        <div className="box">
-          <div className="sidebar">
-            <div className="side">
-              <div className="header">
-                <h1>you Chat</h1>
-              </div>
-              <div className="side-inner">
-                <div className="side-list">
-                  {users.map((user) => {
-                    return (
-                      <div key={user.id} className="side-item">
-                        <span className="profileImage">
-                          {generateProfileImg(user.name)}
-                        </span>
-                        <span>{user.name}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+      <div className="sidebar">
+        <div className="side">
+          <div className="header">
+            <h1>you Chat</h1>
+          </div>
+          <div className="side-inner">
+            <div className="side-list">
+              {users.map((user) => {
+                return (
+                  <div key={user.id} className="side-item">
+                    <span className="profileImage">
+                      {generateProfileImg(user.name)}
+                    </span>
+                    <span>{user.name}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
-          <div className="wrapper">
-            <div className="main">
-              <div className="header">
-                <div className="current-user">
-                  <span>{currentuser}</span>
-                  <span className="profileImage">
-                    {generateProfileImg(currentuser)}
-                  </span>
-                  <Link to="/">Salir de la sala</Link>
-                </div>
-              </div>
-              <div className="main-inner">
-                <div className="main-content">
-                  {messages.map((message, index) => {
-                    const { user, text } = message;
+        </div>
+      </div>
+      <div className="wrapper">
+        <div className="main">
+          <div className="header">
+            <div className="current-user">
+              <span>{currentuser}</span>
+              <span className="profileImage">
+                {generateProfileImg(currentuser)}
+              </span>
+              <Link to="/">Salir de la sala</Link>
+            </div>
+          </div>
+          <div className="main-inner">
+            <div className="main-content">
+              {messages.map((message, index) => {
+                const { user, text } = message;
 
-                    return (
-                      <div key={index + 1} className="message-item">
-                        {user === currentuser ? (
-                          <div className="message-right">
-                            <span className="profileImage">
-                              {generateProfileImg(currentuser)}
-                            </span>
-                            <div className="message">
-                              <div className="message-user">
-                                <div className="user-name">{currentuser}</div>
-                              </div>
-                              <p>{text}</p>
-                            </div>
+                return (
+                  <div key={index + 1} className="message-item">
+                    {user === currentuser ? (
+                      <div className="message-right">
+                        <span className="profileImage">
+                          {generateProfileImg(currentuser)}
+                        </span>
+                        <div className="message">
+                          <div className="message-user">
+                            <div className="user-name">{currentuser}</div>
                           </div>
-                        ) : (
-                          <div className="message-left">
-                            <span className="profileImage">
-                              {generateProfileImg(user)}
-                            </span>
-                            <div className="message">
-                              <div className="message-user">
-                                <div className="user-name">{user}</div>
-                              </div>
-                              <p>{text}</p>
-                            </div>
-                          </div>
-                        )}
+                          <p>{text}</p>
+                        </div>
                       </div>
-                    );
-                  })}
-
-                  <div className="input-container">
-                    <div className="input-inner">
-                      <input
-                        className="input"
-                        type="text"
-                        placeholder="write you message"
-                        value={message}
-                        onChange={({ target: { value } }) => setMessage(value)}
-                        onKeyPress={(event) =>
-                          event.key === "Enter" ? sendMessage(event) : null
-                        }
-                      />
-                      <button
-                        className="sendButton"
-                        onClick={(event) => sendMessage(event)}
-                      >
-                        send message
-                      </button>
-                    </div>
+                    ) : (
+                      <div className="message-left">
+                        <span className="profileImage">
+                          {generateProfileImg(user)}
+                        </span>
+                        <div className="message">
+                          <div className="message-user">
+                            <div className="user-name">{user}</div>
+                          </div>
+                          <p>{text}</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
+                );
+              })}
+
+              <div className="input-container">
+                <div className="input-inner">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="write you message"
+                    value={message}
+                    onChange={({ target: { value } }) => setMessage(value)}
+                    onKeyPress={(event) =>
+                      event.key === "Enter" ? sendMessage(event) : null
+                    }
+                  />
+                  <button
+                    className="sendButton"
+                    onClick={(event) => sendMessage(event)}
+                  >
+                    send message
+                  </button>
                 </div>
               </div>
             </div>

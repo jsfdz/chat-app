@@ -23,8 +23,9 @@ const Register = ({ message, signup }) => {
     <div className="log-container">
       <div className="title">
         <Link to="/">
-          <i class="fas fa-chevron-left"></i>
+          <i className="fas fa-chevron-left"></i>
         </Link>
+        <img src="./img/iconchat.svg" alt="" />
         YouChat...
       </div>
       <h4>Sign Up</h4>

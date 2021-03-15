@@ -1,0 +1,18 @@
+.user-icon {
+}
+
+.profileImage {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: $bg-font-secondary;
+  font-size: 1.3rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.imgTitle {
+  background: #e1f4f3;
+  color: $cl-txt-title;
+}

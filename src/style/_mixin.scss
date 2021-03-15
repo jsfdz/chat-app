@@ -1,7 +1,7 @@
 @mixin title {
   font-family: $font-txt-secondary;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 400;
   color: $cl-title;
 }
 
@@ -11,14 +11,15 @@
 }
 
 @mixin btn {
+  border-radius: 6px;
   background-color: $bg-primary;
   color: #fff;
   font-weight: 600;
-  box-shadow: -1px 1px 10px rgba(56, 56, 56, 0.555);
+  box-shadow: -1px 1px 10px rgba(56, 56, 56, 0.3);
   cursor: pointer;
   transition: all 0.4s;
   &:hover {
-    background-color: #e9820c;
+    background-color: $bg-font-secondary;
     transform: translateY(-2px);
   }
   &:focus {
@@ -31,6 +32,7 @@
   border: none;
   padding: 8px 10px;
   border-radius: 6px;
+  box-shadow: -1px 1px 10px rgba(56, 56, 56, 0.041);
 }
 
 @mixin msgs {
