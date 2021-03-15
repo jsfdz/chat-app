@@ -10,7 +10,7 @@ const Home = ({ access, username, disconnect }) => {
       {access ? (
         <div className="home">
           <div className="title">
-            <div>
+            <div className="title-icon">
               <img src="./img/iconchat.svg" alt="" />
               YouChat...
             </div>
@@ -20,8 +20,8 @@ const Home = ({ access, username, disconnect }) => {
               </span>
             </div>
           </div>
-          <h4>Welcome, {username}</h4>
           <div className="home-access">
+            <h4>Welcome, {username}</h4>
             <Join username={username} />
             <div className="btn-singout">
               <i className="fas fa-sign-out-alt" onClick={disconnect}></i>
@@ -31,8 +31,10 @@ const Home = ({ access, username, disconnect }) => {
       ) : (
         <div className="home">
           <div className="title">
-            <img src="./img/iconchat.svg" alt="" />
-            YouChat...
+            <div className="title-icon">
+              <img src="./img/iconchat.svg" alt="" />
+              YouChat...
+            </div>
           </div>
           <h4>Welcome to roomChat</h4>
           <div className="home-container">

@@ -1,5 +1,4 @@
 @mixin title {
-  font-family: $font-txt-secondary;
   font-size: 20px;
   font-weight: 400;
   color: $cl-title;
@@ -33,6 +32,9 @@
   padding: 8px 10px;
   border-radius: 6px;
   box-shadow: -1px 1px 10px rgba(56, 56, 56, 0.041);
+  &:focus {
+    border: 1.7px solid #01a38a;
+  }
 }
 
 @mixin msgs {

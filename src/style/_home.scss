@@ -1,5 +1,4 @@
 .home {
-  height: 100vh;
   h4 {
     margin: 20px 0;
     text-align: center;
@@ -8,27 +7,27 @@
   }
 }
 
-@media (min-width: 740px) {
-  .home-container {
-    display: flex;
-  }
-}
-
 .title {
   background-color: $bg-primary;
   height: 60px;
   display: flex;
-  justify-content: space-between;
   padding: 0 20px;
   @include title;
   div {
     display: flex;
     @include xy;
     color: #fff;
-    img {
-      margin-right: 10px;
-      height: 26px;
-    }
+  }
+}
+
+.title-icon {
+  margin-right: auto;
+  a {
+    margin-right: 35px;
+  }
+  img {
+    margin-right: 10px;
+    height: 26px;
   }
 }
 
@@ -64,8 +63,36 @@
   overflow: hidden;
   img {
     width: 150%;
-    position: relative;
-    bottom: -40%;
-    right: -8%;
+    @media (max-width: 519px) {
+      position: relative;
+      bottom: -40%;
+      right: -8%;
+    }
+  }
+}
+
+@media (min-width: 520px) {
+  .container {
+    overflow: auto;
+  }
+  .home-container {
+    margin: 0 auto;
+    max-width: 900px;
+    display: flex;
+    @include xy;
+    > div {
+      width: 50%;
+    }
+  }
+
+  .option-login {
+    max-width: 400px;
+  }
+
+  .img-container {
+    img {
+      width: 95%;
+      max-height: 400px;
+    }
   }
 }

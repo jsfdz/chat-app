@@ -1,6 +1,3 @@
-.user-icon {
-}
-
 .profileImage {
   display: block;
   width: 30px;
@@ -15,4 +12,9 @@
 .imgTitle {
   background: #e1f4f3;
   color: $cl-txt-title;
+}
+
+.user-icon {
+  justify-content: end;
+  margin-left: auto;
 }

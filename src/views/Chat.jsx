@@ -48,39 +48,40 @@ const Chat = ({ token, currentuser }) => {
   };
 
   return (
-    <>
-      <div className="sidebar">
-        <div className="side">
-          <div className="header">
-            <h1>you Chat</h1>
-          </div>
-          <div className="side-inner">
-            <div className="side-list">
-              {users.map((user) => {
-                return (
-                  <div key={user.id} className="side-item">
-                    <span className="profileImage">
-                      {generateProfileImg(user.name)}
-                    </span>
-                    <span>{user.name}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+    <div className="chat">
+      <div className="title">
+        <div className="title-icon">
+          <img src="./img/iconchat.svg" alt="" />
+          YouChat...
+        </div>
+        <div className="user-icon">
+          <span className="username">{currentuser}</span>
+          <span className="profileImage imgTitle">
+            {generateProfileImg(currentuser)}
+          </span>
+          {/* <Link to="/">Salir de la sala</Link> */}
         </div>
       </div>
+
+      <div className="sidebar">
+        <h1>Conversations</h1>
+        <div className="side-list">
+          {users.map((user) => {
+            return (
+              <div key={user.id} className="side-item">
+                <span className="profileImage">
+                  {generateProfileImg(user.name)}
+                </span>
+                <span>{user.name}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       <div className="wrapper">
         <div className="main">
-          <div className="header">
-            <div className="current-user">
-              <span>{currentuser}</span>
-              <span className="profileImage">
-                {generateProfileImg(currentuser)}
-              </span>
-              <Link to="/">Salir de la sala</Link>
-            </div>
-          </div>
+          <div className="header"></div>
           <div className="main-inner">
             <div className="main-content">
               {messages.map((message, index) => {
@@ -141,7 +142,7 @@ const Chat = ({ token, currentuser }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
