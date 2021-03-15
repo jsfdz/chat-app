@@ -8,7 +8,7 @@ const Home = ({ access, username, disconnect }) => {
 
     return (
         <>
-            { access ? (
+            {access ? (
                 <>
                     <h1>Welcome, <span className='profileImage'>{generateProfileImg(username)}</span> {username}</h1>
                     <button onClick={disconnect}>logout</button>
@@ -16,7 +16,7 @@ const Home = ({ access, username, disconnect }) => {
                 </>
             ) : (
                 <>
-                    <h1>Welcome to roomChat</h1>
+                    <h1>Welcome to you Chat</h1>
                     <p>please login with your account to join the chat</p>
                     <Link to='/login'>login</Link>
                     <p>or</p>
