@@ -1,0 +1,46 @@
+.log-container {
+  height: 100vh;
+  h4 {
+    margin: 20px 0;
+    text-align: center;
+    color: $cl-txt-title;
+    font-size: 1.6rem;
+  }
+}
+
+.fa-chevron-left {
+  color: #fff;
+  font-size: 2rem;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+}
+
+.form-content {
+  width: 85%;
+  margin: 10px auto;
+  p {
+    text-align: center;
+    opacity: 0.8;
+  }
+  form {
+    div {
+      margin-bottom: 18px;
+      label {
+        padding: 10px;
+      }
+      input {
+        width: 94%;
+        @include inp;
+      }
+    }
+  }
+}
+
+.btn-submit {
+  display: flex;
+  @include xy;
+  input {
+    @include btn;
+  }
+}

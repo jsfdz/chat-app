@@ -1,0 +1,28 @@
+.msg {
+  width: 50%;
+  margin: auto;
+  p {
+    text-align: center;
+  }
+}
+
+.access-successfuly {
+  background: rgba(0, 255, 85, 0.342);
+  color: rgb(6, 150, 66);
+  @include msgs;
+}
+
+.access-error {
+  background: $bg-error;
+  color: $cl-txt-error;
+  @include msgs;
+}
+
+.error {
+  background: $bg-error;
+  color: $cl-txt-error;
+  width: 60%;
+  margin: 5px auto 0;
+  @include msgs;
+  padding: 0;
+}

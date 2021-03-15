@@ -1,0 +1,63 @@
+.home-access {
+  width: 85%;
+  margin: 10px auto;
+  font-size: 1.2rem;
+  flex-wrap: wrap;
+  > div {
+    width: 100%;
+  }
+}
+
+.create-room {
+  margin: 20px 0;
+  div {
+    input {
+      width: 90%;
+      max-width: 600px;
+      margin: 10px 0;
+      @include inp;
+    }
+    a {
+      button {
+        border-radius: 6px;
+        border: none;
+        padding: 8px 12px;
+        @include btn;
+      }
+    }
+  }
+  @media (min-width: 560px) {
+    display: flex;
+    flex-wrap: wrap;
+    @include xy;
+    p {
+      width: 100%;
+      text-align: center;
+    }
+    div {
+      input {
+        width: 450px;
+      }
+      a {
+        button {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+.btn-singout {
+  margin-top: 10%;
+  i {
+    font-size: 45px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    &:hover {
+      transition: all 0.3s;
+      color: #cf0000;
+    }
+  }
+}

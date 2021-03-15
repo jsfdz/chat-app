@@ -1,56 +1,53 @@
-import { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
-import io from 'socket.io-client'
-import queryString from 'query-string'
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import io from "socket.io-client";
+import queryString from "query-string";
 
-let socket
+let socket;
 
 const Chat = ({ token }) => {
+  const { search } = useLocation();
 
-    const { search } = useLocation()
+  useEffect(() => {
+    const { name, room } = queryString.parse(search);
 
-    useEffect(() => {
+    const options = {
+      query: {
+        token,
+      },
+    };
 
-        const { name, room } = queryString.parse(search)
+    socket = io("https://academlo-chat.herokuapp.com/", options);
 
-        const options = {
-            query: {
-                token
-            }
-        }
+    socket.emit("join", { name, room }, (error) => {
+      if (error) {
+        console.log(error.toString());
+      }
+    });
 
-        socket = io('https://academlo-chat.herokuapp.com/', options)
+    socket.on("message", (message) => {
+      console.log(message);
+      // setMessages((messages) => [...messages, message]);
+    });
 
-        socket.emit('join', { name, room }, (error) => {
-            if (error) {
-                console.log(error.toString())
-            }
-        })
+    socket.on("roomData", ({ users }) => {
+      console.log(users);
+    });
+  }, [token, search]);
 
-        socket.on('message', (message) => {
-            console.log(message)
-            // setMessages((messages) => [...messages, message]);
-        })
-
-        socket.on('roomData', ({ users }) => {
-            console.log(users)
-        })
-
-    }, [token, search])
-
-    return (
-        <>
-            <h1>Chat</h1>
-            <Link to='/'>Salir de la sala</Link>
-        </>
-    )
-}
+  return (
+    <>
+      <h1>Chat</h1>
+      <Link to="/">Salir de la sala</Link>
+    </>
+  );
+};
 
 const mapStateToProps = (state) => {
-    return {
-        token: state.auth.user.token
-    }
-}
+  return {
+    token: state.auth.user.token,
+  };
+};
 
-export default connect(mapStateToProps)(Chat)
+export default connect(mapStateToProps)(Chat);

@@ -1,0 +1,56 @@
+.home {
+  height: 100vh;
+  h4 {
+    margin: 20px 0;
+    text-align: center;
+    color: $cl-txt-title;
+    font-size: 1.6rem;
+  }
+}
+
+.title {
+  background-color: $bg-primary;
+  height: 60px;
+  display: flex;
+  @include xy;
+  @include title;
+}
+
+.option-login {
+  width: 85%;
+  margin: auto;
+  p {
+    margin: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      font-weight: 500;
+      opacity: 0.8;
+    }
+    a {
+      text-decoration: none;
+      p {
+        border-radius: 10px;
+        @include btn;
+        width: 100px;
+        margin: 20px;
+        padding: 5px 0;
+      }
+    }
+  }
+}
+
+.img-container {
+  overflow: hidden;
+  img {
+    width: 150%;
+    position: relative;
+    bottom: -40%;
+    right: -8%;
+  }
+}

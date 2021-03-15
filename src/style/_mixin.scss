@@ -1,0 +1,41 @@
+@mixin title {
+  font-family: $font-txt-secondary;
+  font-size: 2rem;
+  font-weight: 600;
+  color: $cl-title;
+}
+
+@mixin xy {
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin btn {
+  background-color: $bg-primary;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: -1px 1px 10px rgba(56, 56, 56, 0.555);
+  cursor: pointer;
+  transition: all 0.4s;
+  &:hover {
+    background-color: #e9820c;
+    transform: translateY(-2px);
+  }
+  &:focus {
+    transform: translateY(0px);
+  }
+}
+
+@mixin inp {
+  outline: none;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+@mixin msgs {
+  border-radius: 6px;
+  font-style: italic;
+  font-size: 0.9rem;
+  padding: 3px 0;
+}
