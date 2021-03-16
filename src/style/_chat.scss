@@ -1,5 +1,138 @@
+.room {
+  height: 100%;
+  overflow: hidden;
+}
+
 .username {
   color: #fff;
   margin-right: 12px;
   font-size: 1.1rem;
+}
+
+.room-container {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  @media (max-width: 440px) {
+    > div {
+      width: 100%;
+    }
+  }
+  /*   > div {
+    border: 6px solid #fff;
+    border-radius: 10px;
+  } */
+}
+
+.sidebar {
+  /* display: none; */
+  width: 25%;
+  overflow: auto;
+  h4 {
+    text-align: center;
+    margin: 14px 0;
+    color: $cl-txt-secondary;
+    font-weight: 400;
+  }
+  > div {
+    width: 90%;
+    margin: auto;
+    div {
+      @include xy;
+      justify-content: start;
+      background: #fff;
+      padding: 6px 10px;
+      border-radius: $br;
+      margin-bottom: 10px;
+      span {
+        margin: 0 14px 0 0;
+        text-transform: capitalize;
+      }
+    }
+  }
+}
+
+.wrapper {
+  /* display: none; */
+  width: 75%;
+}
+
+.chat {
+  height: 100%;
+}
+
+.chat-container {
+  width: 100%;
+  padding-bottom: 20px;
+  height: 80%;
+  overflow: auto;
+  > div {
+    display: flex;
+    > div {
+      position: relative;
+    }
+  }
+  @media (min-width: 1200px) {
+    height: 80%;
+  }
+  @media (max-width: 440px) {
+    height: 80%;
+    > div {
+      padding: 0 16px;
+    }
+  }
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  div + div {
+    margin-left: 6px;
+    p {
+      max-width: 350px;
+    }
+    p + p {
+      background-color: #fff;
+      padding: 10px;
+      border-radius: $br;
+    }
+  }
+}
+
+.username-chat {
+  color: $cl-txt-secondary;
+  font-size: 0.9rem;
+}
+
+/* .message-right {
+  background: rgb(177, 36, 233);
+}
+
+.message-left {
+  background: rgb(10, 192, 80);
+} */
+
+.input-container {
+  position: relative;
+  bottom: 115px;
+  height: 55px;
+  width: 100%;
+  background: #fff;
+  @include xy;
+  input {
+    width: 80%;
+    border: 1.3px solid #edf0f5;
+    padding: 8px;
+    border-radius: $br;
+    outline: none;
+  }
+  i {
+    margin-left: 13px;
+    background-color: $bg-primary;
+    padding: 12px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 22px;
+  }
 }

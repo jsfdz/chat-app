@@ -12,24 +12,30 @@ body {
   background-color: $bg-secondary;
 }
 
+.container {
+  height: 100vh;
+}
+
 @media (min-width: 1200px) {
   body {
     background-color: $bg-font-secondary;
+    height: 100vh;
+    overflow: hidden;
   }
 
   #head {
     background-color: $bg-font-primary;
-    height: 30vh;
+    height: 25vh;
+    position: relative;
+    transform: translateY(-400%);
   }
 
   .container {
-    width: 75%;
+    width: 85%;
     max-width: 1200px;
-    height: 90%;
     background-color: $bg-secondary;
-    position: absolute;
+    position: relative;
     z-index: 999;
-    top: 5%;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 10px;
