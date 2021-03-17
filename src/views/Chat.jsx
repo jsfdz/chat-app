@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import io from "socket.io-client";
 import queryString from "query-string";
 import { generateProfileImg } from "../helpers/generateProfileImg";
+import { toBottom } from "../helpers/tobottom";
 
 let socket;
 
@@ -30,7 +31,6 @@ const Chat = ({ token, currentuser }) => {
     });
 
     socket.on("message", (message) => {
-      console.log(message);
       setMessages((messages) => [...messages, message]);
     });
 
@@ -43,6 +43,7 @@ const Chat = ({ token, currentuser }) => {
     event.preventDefault();
 
     if (message) {
+      toBottom();
       socket.emit("sendMessage", message, () => setMessage(""));
     }
   };
@@ -84,6 +85,7 @@ const Chat = ({ token, currentuser }) => {
           <div className="chat">
             <div className="chat-container">
               {messages.map((message, index) => {
+                if (message) toBottom();
                 const { user, text } = message;
                 return (
                   <div key={index + 1} className="message-item">

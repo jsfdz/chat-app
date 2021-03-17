@@ -1,6 +1,9 @@
 .room {
-  height: 100%;
-  overflow: hidden;
+  max-height: 100vh;
+  /*   height: 99.5%;
+  overflow: hidden; */
+  /*   height: 100%;
+  overflow: hidden; */
 }
 
 .username {
@@ -10,24 +13,33 @@
 }
 
 .room-container {
+  height: inherit;
   display: flex;
-  height: 100%;
+  background: #000;
+  /*   height: 100%;
   overflow: hidden;
   @media (max-width: 440px) {
     > div {
       width: 100%;
     }
-  }
+  } */
   /*   > div {
     border: 6px solid #fff;
     border-radius: 10px;
   } */
 }
 
+/* ::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: $bg-primary;
+} */
+
 .sidebar {
   /* display: none; */
   width: 25%;
-  overflow: auto;
+  /*   overflow: auto; */
   h4 {
     text-align: center;
     margin: 14px 0;
@@ -53,21 +65,57 @@
 }
 
 .wrapper {
-  /* display: none; */
   width: 75%;
+  height: 100%;
+
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+
+  /* display: none; */
+  /*   width: 75%; */
+  /*   width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between; */
 }
 
 .chat {
-  height: 100%;
+  flex: 1;
+  position: relative;
+  overflow-y: auto;
+
+  /*   flex: 1;
+  position: relative;
+  overflow-y: auto;
+  background: rgb(162, 15, 207);
+  max-height: 100vh; */
 }
 
 .chat-container {
-  width: 100%;
-  padding-bottom: 20px;
+  height: 100%;
+  padding: 25px 15px;
+  overflow: scroll;
+  overflow-x: hidden;
+
+  /*   height: 100%;
+  padding: 25px 15px;
+  overflow: scroll;
+  overflow-x: hidden; */
+
+  /*   height: 100%; */
+  /*   text-transform: lowercase;
+    padding: 25px 15px;
+    overflow: scroll;
+    overflow-x: hidden; */
+
+  /*   width: 100%;
+  margin-bottom: 20px;
   height: 80%;
-  overflow: auto;
+  overflow: scroll; */
   > div {
     display: flex;
+
     > div {
       position: relative;
     }
@@ -83,7 +131,15 @@
   }
 }
 
+.message-item {
+  width: 95%;
+  margin: auto;
+}
 .message {
+  position: relative;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+
   display: flex;
   align-items: center;
   margin: 15px 0;
@@ -105,20 +161,25 @@
   font-size: 0.9rem;
 }
 
-/* .message-right {
-  background: rgb(177, 36, 233);
+.message-right {
+  justify-content: end;
+  margin-left: auto;
 }
 
 .message-left {
-  background: rgb(10, 192, 80);
-} */
+}
 
 .input-container {
+  background: rgb(233, 6, 6);
+  display: flex;
   position: relative;
+  height: 55px;
+
+  /*   position: relative;
   bottom: 115px;
   height: 55px;
-  width: 100%;
-  background: #fff;
+  width: 100%; */
+  /*   background: #fff; */
   @include xy;
   input {
     width: 80%;
