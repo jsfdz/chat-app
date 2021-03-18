@@ -27,12 +27,11 @@ const Chat = ({ token, currentuser }) => {
 
         socket.emit('join', { name, room }, (error) => {
             if (error) {
-                console.log(error.toString())
+                console.error(error.toString())
             }
         })
 
         socket.on('message', (message) => {
-            console.log(message)
             setMessages((messages) => [...messages, message])
         })
 
@@ -65,8 +64,14 @@ const Chat = ({ token, currentuser }) => {
 
                                         return (
                                             <div key={user.id} className="side-item">
-                                                <span className='profileImage'>{generateProfileImg(user.name)}</span>
-                                                <span>{user.name}</span>
+                                                <div className="side-image">
+                                                    <div className="img-profile">
+                                                        <span className='profileImage'>{generateProfileImg(user.name)}</span>
+                                                    </div>
+                                                </div>
+                                                <div className="side-name">
+                                                    <span>{user.name}</span>
+                                                </div>
                                             </div>
                                         )
                                     })}
@@ -83,46 +88,51 @@ const Chat = ({ token, currentuser }) => {
                                     <Link to='/'>Salir de la sala</Link>
                                 </div>
                             </div>
-                            <div className="main-inner">
-                                <div className="main-content">
-                                    {messages.map((message, index) => {
+                            <div className="main-wrapper">
+                                <div className="main-inner">
+                                    <div className="messages-container">
+                                        {messages.map((message, index) => {
 
-                                        const { user, text } = message
+                                            const { user, text } = message
 
-                                        return (
-                                            <div key={index + 1} className="message-item">
-                                                {user === currentuser ? (
-                                                    <div className="message-right">
-                                                        <span className='profileImage'>{generateProfileImg(currentuser)}</span>
-                                                        <div className="message">
-                                                            <div className="message-user">
-                                                                <div className="user-name">{currentuser}</div>
+                                            return (
+                                                <div key={index + 1} className="message-item">
+                                                    {user === currentuser ? (
+                                                        <div className="message right">
+                                                            <span className='profileImage'>{generateProfileImg(currentuser)}</span>
+                                                            <div className="message-inner">
+                                                                <div className="message-user">
+                                                                    <div className="user-name">{currentuser}</div>
+                                                                </div>
+                                                                <p>
+                                                                    {text}
+                                                                </p>
                                                             </div>
-                                                            <p>
-                                                                {text}
-                                                            </p>
                                                         </div>
-                                                    </div>
-                                                ) : (
-                                                    <div className="message-left">
-                                                        <span className='profileImage'>{generateProfileImg(user)}</span>
+                                                    ) : (
                                                         <div className="message">
-                                                            <div className="message-user">
-                                                                <div className="user-name">{user}</div>
+                                                            <span className='profileImage'>{generateProfileImg(user)}</span>
+                                                            <div className="message-inner">
+                                                                <div className="message-user">
+                                                                    <div className="user-name">{user}</div>
+                                                                </div>
+                                                                <p>
+                                                                    {text}
+                                                                </p>
                                                             </div>
-                                                            <p>
-                                                                {text}
-                                                            </p>
                                                         </div>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        )
-                                    })}
-
-                                    <div className="input-container">
-                                        <div className="input-inner">
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                                <div className="input-container">
+                                    <div className="input-inner">
+                                        <div className="text-content">
                                             <input className="input" type="text" placeholder="write you message" value={message} onChange={({ target: { value } }) => setMessage(value)} onKeyPress={(event) => event.key === 'Enter' ? sendMessage(event) : null} />
+                                        </div>
+                                        <div className="button-containe">
                                             <button className="sendButton" onClick={(event) => sendMessage(event)}>send message</button>
                                         </div>
                                     </div>
