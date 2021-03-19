@@ -9,14 +9,16 @@ import NotFound from "../views/NotFound";
 
 export const AppRouter = () => {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <PublicRoute exact path="/login" component={Login} />
-        <PublicRoute exact path="/register" component={Register} />
-        <PrivateRoute exact path="/chat/:name/:room" component={Chat} />
-        <Route path="*" component={NotFound} />
-      </Switch>
-    </Router>
+    <div className="containet">
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <PublicRoute exact path="/login" component={Login} />
+          <PublicRoute exact path="/register" component={Register} />
+          <PrivateRoute exact path="/chat/:name/:room" component={Chat} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </Router>
+    </div>
   );
 };

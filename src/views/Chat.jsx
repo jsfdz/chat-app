@@ -3,7 +3,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useChat } from "../hooks/useChat";
 import io from "socket.io-client";
 import { generateProfileImg } from "../helpers/generateProfileImg";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 
 let socket;
 
@@ -90,19 +90,18 @@ const Chat = () => {
           <div className="chat">
             <div className="chat-container">
               {messages.map((message, index) => {
-                if (message) toBottom();
                 const { user, text } = message;
                 return (
                   <div key={index + 1} className="message-item">
-                    {user === currentuser ? (
+                    {user === user.username ? (
                       <div className="message message-right">
                         <div>
                           <span className="profileImage">
-                            {generateProfileImg(currentuser)}
+                            {generateProfileImg(user.username)}
                           </span>
                         </div>
                         <div>
-                          <p className="username-chat">{currentuser}</p>
+                          <p className="username-chat">{user.username}</p>
                           <p>{text}</p>
                         </div>
                       </div>
