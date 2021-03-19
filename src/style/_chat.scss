@@ -1,9 +1,6 @@
 .room {
+  height: 100vh;
   max-height: 100vh;
-  /*   height: 99.5%;
-  overflow: hidden; */
-  /*   height: 100%;
-  overflow: hidden; */
 }
 
 .username {
@@ -13,33 +10,30 @@
 }
 
 .room-container {
-  height: inherit;
+  height: calc(100% - 60px);
   display: flex;
-  background: #000;
-  /*   height: 100%;
-  overflow: hidden;
   @media (max-width: 440px) {
     > div {
       width: 100%;
     }
-  } */
+  }
   /*   > div {
     border: 6px solid #fff;
     border-radius: 10px;
   } */
 }
 
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 5px;
 }
 ::-webkit-scrollbar-thumb {
   background: $bg-primary;
-} */
+}
 
 .sidebar {
   /* display: none; */
   width: 25%;
-  /*   overflow: auto; */
+  overflow: auto;
   h4 {
     text-align: center;
     margin: 14px 0;
@@ -67,52 +61,22 @@
 .wrapper {
   width: 75%;
   height: 100%;
-
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;
-
-  /* display: none; */
-  /*   width: 75%; */
-  /*   width: 100%;
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: space-between; */
 }
 
 .chat {
   flex: 1;
   position: relative;
-  overflow-y: auto;
-
-  /*   flex: 1;
-  position: relative;
-  overflow-y: auto;
-  background: rgb(162, 15, 207);
-  max-height: 100vh; */
+  overflow: auto;
+  height: 100%;
 }
 
 .chat-container {
   height: 100%;
   padding: 25px 15px;
-  overflow: scroll;
-  overflow-x: hidden;
-
-  /*   height: 100%;
-  padding: 25px 15px;
-  overflow: scroll;
-  overflow-x: hidden; */
-
-  /*   height: 100%; */
-  /*   text-transform: lowercase;
-    padding: 25px 15px;
-    overflow: scroll;
-    overflow-x: hidden; */
-
-  /*   width: 100%;
-  margin-bottom: 20px;
-  height: 80%;
-  overflow: scroll; */
+  overflow: auto;
   > div {
     display: flex;
 
@@ -159,6 +123,7 @@
 .username-chat {
   color: $cl-txt-secondary;
   font-size: 0.9rem;
+  text-transform: capitalize;
 }
 
 .message-right {
@@ -170,16 +135,10 @@
 }
 
 .input-container {
-  background: rgb(233, 6, 6);
   display: flex;
   position: relative;
   height: 55px;
-
-  /*   position: relative;
-  bottom: 115px;
-  height: 55px;
-  width: 100%; */
-  /*   background: #fff; */
+  width: 100%;
   @include xy;
   input {
     width: 80%;
