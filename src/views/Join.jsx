@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../hooks/useAuth'
 
-const Join = ({ username }) => {
+const Join = () => {
 
+    const { user } = useAuth()
+    const name = user.username
     const [room, setRoom] = useState(null)
 
     return (
@@ -11,9 +14,10 @@ const Join = ({ username }) => {
             <div>
                 <input placeholder='enter a name for the chat room' type='text' onChange={(e) => setRoom(e.target.value)} />
             </div>
-            <Link onClick={(e) => (!username || !room) ? e.preventDefault() : null} to={`/chat?name=${username}&room=${room}`}>
-                <button type="submit">join the chat</button>
+            <Link onClick={(e) => (!name || !room ? e.preventDefault() : null)} to={`/chat/${name}/${room}`}>
+                <button type="submit">Join the chat</button>
             </Link>
+            <Link to='/'>back to home</Link>
         </>
     )
 }

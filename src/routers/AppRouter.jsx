@@ -15,7 +15,7 @@ export const AppRouter = () => {
                 <Route exact path='/' component={Home} />
                 <PublicRoute exact path='/login' component={Login} />
                 <PublicRoute exact path='/register' component={Register} />
-                <PrivateRoute exact path='/chat' component={Chat} />
+                <PrivateRoute exact path='/chat/:name/:room' component={Chat} />
                 <Route path='*' component={NotFound} />
             </Switch>
         </Router>

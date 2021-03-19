@@ -1,51 +1,66 @@
-import { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { useAuth } from '../hooks/useAuth'
+import { useChat } from '../hooks/useChat'
 import io from 'socket.io-client'
-import queryString from 'query-string'
+import { DoDecrypt, DoEncrypt } from '../utils/aes'
 import { generateProfileImg } from '../helpers/generateProfileImg'
+import { Link, useRouteMatch } from 'react-router-dom'
 
 let socket
 
-const Chat = ({ token, currentuser }) => {
+const Chat = () => {
+
+    const { params } = useRouteMatch()
+    const { name, room } = params
+
+    const { user, disconnect } = useAuth()
+    const { messages, setMessages, users, setUsers } = useChat()
 
     const [message, setMessage] = useState('')
-    const [users, setUsers] = useState([])
-    const [messages, setMessages] = useState([])
-
-    const { search } = useLocation()
+    const messagesEndRef = useRef(null)
 
     useEffect(() => {
 
-        socket = io('https://academlo-chat.herokuapp.com/', {
-            query: {
-                token
-            }
-        })
+        if (user) {
+            socket = io('https://academlo-chat.herokuapp.com/', {
+                query: {
+                    token: user.token
+                }
+            })
 
-        const { name, room } = queryString.parse(search)
+            socket.emit('join', { name, room }, (error) => {
+                if (error) {
+                    console.log(error.toString())
+                }
+            })
 
-        socket.emit('join', { name, room }, (error) => {
-            if (error) {
-                console.error(error.toString())
-            }
-        })
+            socket.on('message', (message) => {
+                console.log('mensajes entrado del servidor:', message.text);
+                const decryptMessage = DoDecrypt(message)
+                setMessages({ ...message, text: decryptMessage })
+            })
 
-        socket.on('message', (message) => {
-            setMessages((messages) => [...messages, message])
-        })
+            socket.on('roomData', ({ users }) => {
+                setUsers(users)
+            })
+        }
 
-        socket.on('roomData', ({ users }) => {
-            setUsers(users)
-        })
+        // eslint-disable-next-line
+    }, [user])
 
-    }, [token, search])
+    useEffect(() => {
+
+        messagesEndRef.current
+            .scrollIntoView({ behavior: 'smooth' })
+
+    }, [messages])
 
     const sendMessage = (event) => {
         event.preventDefault()
 
         if (message) {
-            socket.emit('sendMessage', message, () => setMessage(''));
+            const encryptMessage = DoEncrypt(message)
+            socket.emit('sendMessage', encryptMessage, () => setMessage(''))
         }
     }
 
@@ -83,9 +98,11 @@ const Chat = ({ token, currentuser }) => {
                         <div className="main">
                             <div className="header">
                                 <div className="current-user">
-                                    <span>{currentuser}</span>
-                                    <span className='profileImage'>{generateProfileImg(currentuser)}</span>
-                                    <Link to='/'>Salir de la sala</Link>
+                                    <span>{user.username}</span>
+                                    <span className='profileImage'>{generateProfileImg(user.username)}</span>
+                                    <Link to='/login'>
+                                        <button onClick={disconnect}>logout</button>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="main-wrapper">
@@ -97,12 +114,12 @@ const Chat = ({ token, currentuser }) => {
 
                                             return (
                                                 <div key={index + 1} className="message-item">
-                                                    {user === currentuser ? (
+                                                    {user === user.username ? (
                                                         <div className="message right">
-                                                            <span className='profileImage'>{generateProfileImg(currentuser)}</span>
+                                                            <span className='profileImage'>{generateProfileImg(user.username)}</span>
                                                             <div className="message-inner">
                                                                 <div className="message-user">
-                                                                    <div className="user-name">{currentuser}</div>
+                                                                    <div className="user-name">{user.username}</div>
                                                                 </div>
                                                                 <p>
                                                                     {text}
@@ -125,6 +142,7 @@ const Chat = ({ token, currentuser }) => {
                                                 </div>
                                             )
                                         })}
+                                        <div ref={messagesEndRef} />
                                     </div>
                                 </div>
                                 <div className="input-container">
@@ -146,11 +164,4 @@ const Chat = ({ token, currentuser }) => {
     )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        token: state.auth.user.token,
-        currentuser: state.auth.user.username
-    }
-}
-
-export default connect(mapStateToProps)(Chat)
+export default Chat

@@ -1,7 +1,9 @@
 import { Redirect, Route } from 'react-router'
-import { connect } from 'react-redux'
+import { useAuth } from '../hooks/useAuth'
 
-export const PublicRoute = ({ access, component: Component, ...rest }) => {
+export const PublicRoute = ({ component: Component, ...rest }) => {
+
+    const { access } = useAuth()
 
     return (
         <Route {...rest}>
@@ -14,12 +16,4 @@ export const PublicRoute = ({ access, component: Component, ...rest }) => {
     )
 }
 
-//Mapear todos los estados
-const mapStateToProps = (state) => {
-    return {
-        access: state.auth.access
-    }
-}
-
-//Conexion al store
-export default connect(mapStateToProps)(PublicRoute)
+export default PublicRoute
