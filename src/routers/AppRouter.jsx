@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import Home from "../views/Home";
@@ -9,7 +9,7 @@ import NotFound from "../views/NotFound";
 
 export const AppRouter = () => {
   return (
-    <div className="containet">
+    <div className="container">
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />

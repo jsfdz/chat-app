@@ -12,6 +12,7 @@ const Join = () => {
       <p>create a room and share the link with your friends to join the chat</p>
       <div>
         <input
+          className="inp-join"
           placeholder="enter a name for the chat room"
           type="text"
           onChange={(e) => setRoom(e.target.value)}
@@ -22,6 +23,10 @@ const Join = () => {
         to={`/chat/${name}/${room}`}
       >
         <button type="submit">Join the chat</button>
+
+        <div className="btn-submit">
+          <button type="submit">Join the chat</button>
+        </div>
       </Link>
 
       <div className="btn-singout">
