@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { register } from "../redux/actions/auth";
+import { useAuth } from "../hooks/useAuth";
 
-const Register = ({ message, signup }) => {
+const Register = () => {
+  const { message, signup } = useAuth();
+
   useEffect(() => {
     if (message === "Access granted") {
       window.location.reload();
@@ -18,7 +19,6 @@ const Register = ({ message, signup }) => {
     reset();
     clearErrors();
   };
-
   return (
     <div className="log-container">
       <div className="title">
@@ -112,21 +112,4 @@ const Register = ({ message, signup }) => {
   );
 };
 
-//Mapear todos los estados
-const mapStateToProps = (state) => {
-  return {
-    message: state.message.message,
-  };
-};
-
-//Mapear todos los distpatch
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signup: (user) => {
-      dispatch(register(user));
-    },
-  };
-};
-
-//Conexion al store
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default Register;

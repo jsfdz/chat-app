@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { login } from "../redux/actions/auth";
+import { useAuth } from "../hooks/useAuth";
 
-const Login = ({ signin, message }) => {
+const Login = () => {
+  const { message, signin } = useAuth();
+
   useEffect(() => {
     if (message === "Access granted") {
       window.location.reload();
@@ -95,21 +96,4 @@ const Login = ({ signin, message }) => {
   );
 };
 
-//Mapear todos los estados
-const mapStateToProps = (state) => {
-  return {
-    message: state.message.message,
-  };
-};
-
-//Mapear todos los distpatch
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signin: (user) => {
-      dispatch(login(user));
-    },
-  };
-};
-
-//Conexion al store
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

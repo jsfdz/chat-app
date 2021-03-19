@@ -1,7 +1,8 @@
 import { Redirect, Route, useLocation } from "react-router";
-import { connect } from "react-redux";
+import { useAuth } from "../hooks/useAuth";
 
-const PrivateRoute = ({ access, component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  const { access } = useAuth();
   const location = useLocation();
 
   return (
@@ -15,12 +16,4 @@ const PrivateRoute = ({ access, component: Component, ...rest }) => {
   );
 };
 
-//Mapear todos los estados
-const mapStateToProps = (state) => {
-  return {
-    access: state.auth.access,
-  };
-};
-
-//Conexion al store
-export default connect(mapStateToProps)(PrivateRoute);
+export default PrivateRoute;

@@ -1,49 +1,55 @@
-import { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import { useChat } from "../hooks/useChat";
 import io from "socket.io-client";
-import queryString from "query-string";
 import { generateProfileImg } from "../helpers/generateProfileImg";
-import { toBottom } from "../helpers/tobottom";
+import { Link, useRouteMatch } from "react-router-dom";
 
 let socket;
 
-const Chat = ({ token, currentuser }) => {
-  const [message, setMessage] = useState("");
-  const [users, setUsers] = useState([]);
-  const [messages, setMessages] = useState([]);
+const Chat = () => {
+  const { params } = useRouteMatch();
+  const { name, room } = params;
 
-  const { search } = useLocation();
+  const { user } = useAuth();
+  const { messages, setMessages, users, setUsers } = useChat();
+
+  const [message, setMessage] = useState("");
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    socket = io("https://academlo-chat.herokuapp.com/", {
-      query: {
-        token,
-      },
-    });
+    if (user) {
+      socket = io("https://academlo-chat.herokuapp.com/", {
+        query: {
+          token: user.token,
+        },
+      });
 
-    const { name, room } = queryString.parse(search);
+      socket.emit("join", { name, room }, (error) => {
+        if (error) {
+          console.log(error.toString());
+        }
+      });
 
-    socket.emit("join", { name, room }, (error) => {
-      if (error) {
-        console.log(error.toString());
-      }
-    });
+      socket.on("message", (message) => {
+        setMessages(message);
+      });
 
-    socket.on("message", (message) => {
-      setMessages((messages) => [...messages, message]);
-    });
+      socket.on("roomData", ({ users }) => {
+        setUsers(users);
+      });
+    }
+    // eslint-disable-next-line
+  }, [user]);
 
-    socket.on("roomData", ({ users }) => {
-      setUsers(users);
-    });
-  }, [token, search]);
+  useEffect(() => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const sendMessage = (event) => {
     event.preventDefault();
 
     if (message) {
-      toBottom();
       socket.emit("sendMessage", message, () => setMessage(""));
     }
   };
@@ -56,14 +62,13 @@ const Chat = ({ token, currentuser }) => {
           YouChat...
         </div>
         <div className="user-icon">
-          <span className="username">{currentuser}</span>
+          <span className="username">{user.username}</span>
           <span className="profileImage imgTitle">
-            {generateProfileImg(currentuser)}
+            {generateProfileImg(user.username)}
           </span>
           {/* <Link to="/">Salir de la sala</Link> */}
         </div>
       </div>
-
       <div className="room-container">
         <div className="sidebar">
           <h4>Conversations</h4>
@@ -117,6 +122,7 @@ const Chat = ({ token, currentuser }) => {
                   </div>
                 );
               })}
+              <div ref={messagesEndRef} />
             </div>
           </div>
 
@@ -141,11 +147,4 @@ const Chat = ({ token, currentuser }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    token: state.auth.user.token,
-    currentuser: state.auth.user.username,
-  };
-};
-
-export default connect(mapStateToProps)(Chat);
+export default Chat;

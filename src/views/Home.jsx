@@ -1,10 +1,11 @@
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { logout } from "../redux/actions/auth";
-import Join from "./Join";
+import Join from "../views/Join";
 import { generateProfileImg } from "../helpers/generateProfileImg";
+import { useAuth } from "../hooks/useAuth";
 
-const Home = ({ access, username, disconnect }) => {
+const Home = () => {
+  const { access, user } = useAuth();
+
   return (
     <>
       {access ? (
@@ -16,16 +17,13 @@ const Home = ({ access, username, disconnect }) => {
             </div>
             <div className="user-icon">
               <span className="profileImage imgTitle">
-                {generateProfileImg(username)}
+                {generateProfileImg(user.username)}
               </span>
             </div>
           </div>
           <div className="home-access">
-            <h4>Welcome, {username}</h4>
-            <Join username={username} />
-            <div className="btn-singout">
-              <i className="fas fa-sign-out-alt" onClick={disconnect}></i>
-            </div>
+            <h4>Welcome, {user.username}</h4>
+            <Join />
           </div>
         </div>
       ) : (
@@ -60,22 +58,4 @@ const Home = ({ access, username, disconnect }) => {
   );
 };
 
-//Mapear todos los estados
-const mapStateToProps = (state) => {
-  return {
-    access: state.auth.access,
-    username: state.auth.user?.username,
-  };
-};
-
-//Mapear todos los distpatch
-const mapDispatchToProps = (dispatch) => {
-  return {
-    disconnect: () => {
-      dispatch(logout());
-    },
-  };
-};
-
-//Conexion al store
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
