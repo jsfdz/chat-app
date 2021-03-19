@@ -4,6 +4,7 @@
     text-align: center;
     color: $cl-txt-title;
     font-size: 1.6rem;
+    width: 100%;
   }
 }
 
@@ -95,9 +96,4 @@
       max-height: 400px;
     }
   }
-}
-
-.inp-join {
-  width: 94%;
-  @include inp;
 }

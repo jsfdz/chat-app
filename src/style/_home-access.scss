@@ -1,4 +1,5 @@
 .home-access {
+  display: flex;
   width: 85%;
   margin: 8% auto;
   font-size: 1.2rem;
@@ -61,3 +62,9 @@
     }
   }
 }
+
+/* .inp-join {
+  width: 94%;
+  @include inp;
+}
+ */

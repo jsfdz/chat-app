@@ -9,26 +9,27 @@ const Join = () => {
 
   return (
     <>
-      <p>create a room and share the link with your friends to join the chat</p>
-      <div>
-        <input
-          className="inp-join"
-          placeholder="enter a name for the chat room"
-          type="text"
-          onChange={(e) => setRoom(e.target.value)}
-        />
-      </div>
-      <Link
-        onClick={(e) => (!name || !room ? e.preventDefault() : null)}
-        to={`/chat/${name}/${room}`}
-      >
-        <button type="submit">Join the chat</button>
-
-        <div className="btn-submit">
-          <button type="submit">Join the chat</button>
+      <div className="create-room">
+        <p>
+          create a room and share the link with your friends to join the chat
+        </p>
+        <div>
+          <input
+            className="inp-join"
+            placeholder="enter a name for the chat room"
+            type="text"
+            onChange={(e) => setRoom(e.target.value)}
+          />
         </div>
-      </Link>
-
+        <div>
+          <Link
+            onClick={(e) => (!name || !room ? e.preventDefault() : null)}
+            to={`/chat/${name}/${room}`}
+          >
+            <button type="submit">Join the chat</button>
+          </Link>
+        </div>
+      </div>
       <div className="btn-singout">
         <i className="fas fa-sign-out-alt" onClick={disconnect}></i>
       </div>

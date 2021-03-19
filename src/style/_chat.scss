@@ -34,6 +34,7 @@
   /* display: none; */
   width: 25%;
   overflow: auto;
+  border-right: 6px solid #fff;
   h4 {
     text-align: center;
     margin: 14px 0;
@@ -78,33 +79,17 @@
   padding: 25px 15px;
   overflow: auto;
   > div {
+    width: 95%;
+    margin: auto;
     display: flex;
-
-    > div {
-      position: relative;
-    }
-  }
-  @media (min-width: 1200px) {
-    height: 80%;
-  }
-  @media (max-width: 440px) {
-    height: 80%;
-    > div {
-      padding: 0 16px;
-    }
   }
 }
 
-.message-item {
-  width: 95%;
-  margin: auto;
-}
 .message {
   position: relative;
+  display: flex;
   overflow-wrap: break-word;
   white-space: pre-wrap;
-
-  display: flex;
   align-items: center;
   margin: 15px 0;
   div + div {
