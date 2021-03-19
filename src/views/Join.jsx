@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth'
 
 const Join = () => {
 
-    const { user } = useAuth()
+    const { user, disconnect } = useAuth()
     const name = user.username
     const [room, setRoom] = useState(null)
 
@@ -17,7 +17,7 @@ const Join = () => {
             <Link onClick={(e) => (!name || !room ? e.preventDefault() : null)} to={`/chat/${name}/${room}`}>
                 <button type="submit">Join the chat</button>
             </Link>
-            <Link to='/'>back to home</Link>
+            <button onClick={disconnect}>logout</button>
         </>
     )
 }

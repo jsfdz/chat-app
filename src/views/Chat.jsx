@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../hooks/useAuth'
 import { useChat } from '../hooks/useChat'
 import io from 'socket.io-client'
-import { DoDecrypt, DoEncrypt } from '../utils/aes'
 import { generateProfileImg } from '../helpers/generateProfileImg'
 import { Link, useRouteMatch } from 'react-router-dom'
 
@@ -13,7 +12,7 @@ const Chat = () => {
     const { params } = useRouteMatch()
     const { name, room } = params
 
-    const { user, disconnect } = useAuth()
+    const { user } = useAuth()
     const { messages, setMessages, users, setUsers } = useChat()
 
     const [message, setMessage] = useState('')
@@ -35,32 +34,26 @@ const Chat = () => {
             })
 
             socket.on('message', (message) => {
-                console.log('mensajes entrado del servidor:', message.text);
-                const decryptMessage = DoDecrypt(message)
-                setMessages({ ...message, text: decryptMessage })
+                setMessages(message)
             })
 
             socket.on('roomData', ({ users }) => {
                 setUsers(users)
             })
         }
-
         // eslint-disable-next-line
     }, [user])
 
     useEffect(() => {
-
         messagesEndRef.current
             .scrollIntoView({ behavior: 'smooth' })
-
     }, [messages])
 
     const sendMessage = (event) => {
         event.preventDefault()
 
         if (message) {
-            const encryptMessage = DoEncrypt(message)
-            socket.emit('sendMessage', encryptMessage, () => setMessage(''))
+            socket.emit('sendMessage', message, () => setMessage(''))
         }
     }
 
@@ -100,8 +93,8 @@ const Chat = () => {
                                 <div className="current-user">
                                     <span>{user.username}</span>
                                     <span className='profileImage'>{generateProfileImg(user.username)}</span>
-                                    <Link to='/login'>
-                                        <button onClick={disconnect}>logout</button>
+                                    <Link to={'/'}>
+                                        <button>logout chat</button>
                                     </Link>
                                 </div>
                             </div>
